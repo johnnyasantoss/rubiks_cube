@@ -4,6 +4,7 @@
  - [ x ] Initial objects
  - [   ] Pretty print the cube in the console
  - [   ] Parse expresions eg. `LL'R => left, left, reverse right` `U2 => up in the 2 column`
+ - [   ] IDLE with [ReadLine](https://github.com/tonerdo/readline)
  - [   ] Execute moves
  - [   ] Automatic solver
  - [   ] Logging of whats is happening
