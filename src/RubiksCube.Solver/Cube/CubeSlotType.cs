@@ -1,6 +1,6 @@
-namespace RubiksCube.Solver
+﻿namespace RubiksCube.Solver
 {
-    enum SlotType
+    enum CubeSlotType
     {
         Invalid = 0,
         Side,
