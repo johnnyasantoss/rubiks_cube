@@ -22,6 +22,8 @@ namespace RubiksCube.Core.Cube
             SanityCheck();
         }
 
+        public CubeFace[] Faces => _faces;
+
         private void SanityCheck()
         {
             var faceSize = -1;
