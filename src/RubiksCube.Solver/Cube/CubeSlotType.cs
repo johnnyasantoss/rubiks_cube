@@ -2,9 +2,9 @@
 {
     public enum CubeSlotType
     {
-        Invalid = 0,
-        Side,
-        Center,
-        Edge
+        Invalid = 0
+        , Side
+        , Center
+        , Edge
     }
 }

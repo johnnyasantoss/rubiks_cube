@@ -2,17 +2,17 @@ namespace RubiksCube.Solver.Cube
 {
     public class CubeColor
     {
-        public static CubeColor Red = new CubeColor("Red");
+        public static readonly CubeColor Red = new CubeColor("Red");
 
-        public static CubeColor Green = new CubeColor("Green");
+        public static readonly CubeColor Green = new CubeColor("Green");
 
-        public static CubeColor Yellow = new CubeColor("Yellow");
+        public static readonly CubeColor Yellow = new CubeColor("Yellow");
 
-        public static CubeColor White = new CubeColor("White");
+        public static readonly CubeColor White = new CubeColor("White");
 
-        public static CubeColor Blue = new CubeColor("Blue");
+        public static readonly CubeColor Blue = new CubeColor("Blue");
 
-        public static CubeColor Orange = new CubeColor("Orange");
+        public static readonly CubeColor Orange = new CubeColor("Orange");
 
         private CubeColor(string description)
         {
@@ -22,6 +22,6 @@ namespace RubiksCube.Solver.Cube
         public string Description { get; }
 
         public override string ToString()
-          => Description;
+            => Description;
     }
 }

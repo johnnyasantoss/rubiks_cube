@@ -1,12 +1,10 @@
-﻿using System.Linq;
-
-namespace RubiksCube.Solver
+﻿namespace RubiksCube.Solver
 {
-    private static class Program
+    static class Program
     {
         private static void Main(string[] args)
         {
-            var r = new RubiksCube(3);
+            var r = new Cube.RubiksCube(3);
         }
     }
 }

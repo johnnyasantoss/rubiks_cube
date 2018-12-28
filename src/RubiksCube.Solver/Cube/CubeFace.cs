@@ -27,28 +27,29 @@ namespace RubiksCube.Solver.Cube
 
         private void InitializeSlots()
         {
-            for (int i = 0; i < Size; i++)
-                for (int j = 0; j < Size; j++)
-                {
-                    var slotType = GetSlotType(i, j);
-                    Slots[i, j] = new CubeSlot(CenterColor, slotType);
-                }
+            for (var i = 0; i < Size; i++)
+            for (var j = 0; j < Size; j++)
+            {
+                var slotType = GetSlotType(i, j);
+                Slots[i, j] = new CubeSlot(CenterColor, slotType);
+            }
         }
 
-        private SlotType GetSlotType(int x, int y)
+        private CubeSlotType GetSlotType(int x, int y)
         {
             var biggest = Size - 1;
 
             if ((x == 0 || x == biggest) && (y == 0 || y == biggest))
-                return SlotType.Edge;
+                return CubeSlotType.Edge;
 
             var biggestWithoutEdge = biggest - 1;
             var lowestWithoutEdge = 0 + 1;
+
             if ((x <= biggestWithoutEdge && x >= lowestWithoutEdge)
                 && (y <= biggestWithoutEdge && y >= lowestWithoutEdge))
-                return SlotType.Center;
+                return CubeSlotType.Center;
 
-            return SlotType.Side;
+            return CubeSlotType.Side;
         }
     }
 }
