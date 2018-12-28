@@ -1,4 +1,4 @@
-namespace RubiksCube.Solver.Cube
+namespace RubiksCube.Core.Cube
 {
     public class CubeSlot
     {

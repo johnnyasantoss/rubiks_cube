@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3E28E05-3B57-4280-BD3B-FAE16147589F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiksCube.Solver", "src\RubiksCube.Solver\RubiksCube.Solver.csproj", "{BA94F73A-D92D-4CCD-B181-E8B8DA33EFE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiksCube.Core", "src\RubiksCube.Core\RubiksCube.Core.csproj", "{BA94F73A-D92D-4CCD-B181-E8B8DA33EFE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

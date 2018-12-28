@@ -1,4 +1,4 @@
-﻿namespace RubiksCube.Solver
+﻿namespace RubiksCube.Core
 {
     static class Program
     {
