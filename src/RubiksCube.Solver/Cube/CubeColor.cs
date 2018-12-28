@@ -1,6 +1,6 @@
-namespace RubiksCube.Solver
+namespace RubiksCube.Solver.Cube
 {
-    class CubeColor
+    public class CubeColor
     {
         public static CubeColor Red = new CubeColor("Red");
 

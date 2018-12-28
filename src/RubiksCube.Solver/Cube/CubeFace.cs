@@ -1,8 +1,8 @@
 using System;
 
-namespace RubiksCube.Solver
+namespace RubiksCube.Solver.Cube
 {
-    class CubeFace
+    public class CubeFace
     {
         public CubeFace(CubeColor centerColor, ushort size)
         {

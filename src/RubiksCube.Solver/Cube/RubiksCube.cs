@@ -1,8 +1,8 @@
 using System;
 
-namespace RubiksCube.Solver
+namespace RubiksCube.Solver.Cube
 {
-    class RubiksCube
+    public class RubiksCube
     {
         public const ushort SIZE = 6;
         private readonly CubeFace[] _faces;

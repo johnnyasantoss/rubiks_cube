@@ -1,6 +1,6 @@
-namespace RubiksCube.Solver
+namespace RubiksCube.Solver.Cube
 {
-    class CubeSlot
+    public class CubeSlot
     {
         public CubeSlot(CubeColor color, SlotType type)
         {

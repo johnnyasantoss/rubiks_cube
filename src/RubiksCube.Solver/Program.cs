@@ -2,9 +2,9 @@
 
 namespace RubiksCube.Solver
 {
-    class Program
+    private static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var r = new RubiksCube(3);
         }
