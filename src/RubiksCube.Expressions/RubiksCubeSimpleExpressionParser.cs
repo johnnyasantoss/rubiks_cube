@@ -18,16 +18,16 @@ namespace RubiksCube.Expressions
                 TurnType.Line, new[]
                 {
                     // TOP
-                    "TOP"
-                    , "T"
-                    , "TOP'"
+                    "TOP'"
                     , "T'"
+                    , "TOP"
+                    , "T"
 
                     // BOTTOM
-                    , "BOTTOM"
-                    , "B"
                     , "BOTTOM'"
                     , "B'"
+                    , "BOTTOM"
+                    , "B"
                 }
             }
             ,
@@ -35,28 +35,28 @@ namespace RubiksCube.Expressions
                 TurnType.Column, new[]
                 {
                     // LEFT
-                    "LEFT"
-                    , "L"
-                    , "LEFT'"
+                    "LEFT'"
                     , "L'"
+                    , "LEFT"
+                    , "L"
 
                     // FRONT
-                    , "FRONT"
-                    , "F"
                     , "FRONT'"
                     , "F'"
+                    , "FRONT"
+                    , "F"
 
                     // RIGHT
-                    , "RIGHT"
-                    , "R"
                     , "RIGHT'"
                     , "R'"
+                    , "RIGHT"
+                    , "R"
 
                     // BACK
-                    , "BACK"
-                    , "U"
                     , "BACK'"
                     , "U'"
+                    , "BACK"
+                    , "U"
                 }
             }
         };
