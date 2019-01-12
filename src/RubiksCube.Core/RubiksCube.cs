@@ -85,23 +85,43 @@ namespace RubiksCube.Core
         {
             switch (turn)
             {
+                //TODO: Spin the cube on front and back moves
                 case SimpleDirectionTurn.Front:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Normal);
+                    break;
                 case SimpleDirectionTurn.FrontReverse:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Reverse);
+                    break;
                 case SimpleDirectionTurn.Left:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Column, 0, TurnDirection.Normal);
+                    break;
                 case SimpleDirectionTurn.LeftReverse:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Column, 0, TurnDirection.Reverse);
+                    break;
                 case SimpleDirectionTurn.Right:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Column, RightFace.Size, TurnDirection.Normal);
+                    break;
                 case SimpleDirectionTurn.RightReverse:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Column, RightFace.Size, TurnDirection.Reverse);
+                    break;
                 case SimpleDirectionTurn.Top:
                     Turn(TurnType.Line, 0, TurnDirection.Normal);
                     break;
                 case SimpleDirectionTurn.TopReverse:
-                    throw new NotImplementedException();
+                    Turn(TurnType.Line, 0, TurnDirection.Reverse);
+                    break;
+                case SimpleDirectionTurn.Bottom:
+                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Normal);
+                    break;
+                case SimpleDirectionTurn.BottomReverse:
+                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Reverse);
+                    break;
+                case SimpleDirectionTurn.Back:
+                    Turn(TurnType.Line, 0, TurnDirection.Normal);
+                    break;
+                case SimpleDirectionTurn.BackReverse:
+                    Turn(TurnType.Line, 0, TurnDirection.Reverse);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(turn), turn, null);
             }

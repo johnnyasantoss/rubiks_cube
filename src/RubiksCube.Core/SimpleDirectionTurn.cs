@@ -10,5 +10,9 @@ namespace RubiksCube.Core
         , RightReverse
         , Top
         , TopReverse
+        , Bottom
+        , BottomReverse
+        , Back
+        , BackReverse
     }
 }
