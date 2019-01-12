@@ -4,31 +4,63 @@ namespace RubiksCube.Core.Cube
 {
     public class RubiksCube
     {
-        public const ushort Size = 6;
+        public const ushort FacesSize = 6;
+
+        public const int BackFaceIndex = 5;
+        public const int BottomFaceIndex = 4;
+        public const int FrontFaceIndex = 2;
+        public const int LeftFaceIndex = 1;
+        public const int TopFaceIndex = 0;
+        public const int RightFaceIndex = 3;
+
         private readonly CubeFace[] _faces;
 
-        public RubiksCube(ushort size)
+        public RubiksCube(CubeFace[] faces)
         {
-            _faces = new CubeFace[Size]
-            {
-                new CubeFace(CubeColor.White, size)
-                , new CubeFace(CubeColor.Orange, size)
-                , new CubeFace(CubeColor.Green, size)
-                , new CubeFace(CubeColor.Yellow, size)
-                , new CubeFace(CubeColor.Red, size)
-                , new CubeFace(CubeColor.Blue, size)
-            };
+            if (faces == null)
+                throw new ArgumentNullException(nameof(faces));
 
+            if (faces.Length != FacesSize)
+                throw new InvalidOperationException("Invalid amount of faces for a cube.");
+
+            _faces = faces;
             SanityCheck();
         }
 
+        public RubiksCube(ushort size)
+            : this(
+                new[]
+                {
+                    new CubeFace(CubeColor.Orange, size)
+                    , new CubeFace(CubeColor.Green, size)
+                    , new CubeFace(CubeColor.White, size)
+                    , new CubeFace(CubeColor.Blue, size)
+                    , new CubeFace(CubeColor.Red, size)
+                    , new CubeFace(CubeColor.Yellow, size)
+                }
+            )
+        {
+        }
+
         public CubeFace[] Faces => _faces;
+
+        public CubeFace BackFace => _faces[BackFaceIndex];
+
+        public CubeFace BottomFace => _faces[BottomFaceIndex];
+
+        public CubeFace FrontFace => _faces[FrontFaceIndex];
+
+        public CubeFace LeftFace => _faces[LeftFaceIndex];
+
+        public CubeFace TopFace => _faces[TopFaceIndex];
+
+        public CubeFace RightFace => _faces[RightFaceIndex];
 
         private void SanityCheck()
         {
             var faceSize = -1;
 
-            for (var i = 0; i < Size; i++)
+            for (var i = 0; i < FacesSize; i++)
             {
                 var currentFace = _faces[i];
 
@@ -45,6 +77,86 @@ namespace RubiksCube.Core.Cube
 
                     if (currentSlot == null)
                         throw new Exception($"Invalid slot @ {currentFace.CenterColor}: {j}, {k}");
+                }
+            }
+        }
+
+        public void Turn(SimpleDirectionTurn turn)
+        {
+            switch (turn)
+            {
+                case SimpleDirectionTurn.Front:
+                    break;
+                case SimpleDirectionTurn.FrontReverse:
+                    break;
+                case SimpleDirectionTurn.Left:
+                    break;
+                case SimpleDirectionTurn.LeftReverse:
+                    break;
+                case SimpleDirectionTurn.Right:
+                    break;
+                case SimpleDirectionTurn.RightReverse:
+                    break;
+                case SimpleDirectionTurn.Top:
+                    Turn(TurnType.Line, 0, TurnDirection.Normal);
+                    break;
+                case SimpleDirectionTurn.TopReverse:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(turn), turn, null);
+            }
+        }
+
+        public void Turn(TurnType type, ushort indexer, TurnDirection direction)
+        {
+            switch (type)
+            {
+                case TurnType.Line:
+                    TurnLine(ref indexer, ref direction);
+                    break;
+                case TurnType.Column:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        private void TurnLine(
+            ref ushort indexer
+            , ref TurnDirection direction
+        )
+        {
+            switch (direction)
+            {
+                case TurnDirection.Normal:
+                    TurnLineNormal(ref indexer);
+                    break;
+                case TurnDirection.Reverse:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        }
+
+        private void TurnLineNormal(ref ushort indexer)
+        {
+            var frontFace = FrontFace;
+
+            var faces = new[]
+            {
+                frontFace, LeftFace, BackFace, RightFace, frontFace
+            };
+
+            var temp = new CubeSlot[frontFace.Size];
+
+            foreach (var currentFace in faces)
+            {
+                for (var i = 0; i < currentFace.Size; i++)
+                {
+                    //swap
+                    var currentTemp = currentFace.Slots[indexer, i];
+                    currentFace.Slots[indexer, i] = temp[i];
+                    temp[i] = currentTemp;
                 }
             }
         }
