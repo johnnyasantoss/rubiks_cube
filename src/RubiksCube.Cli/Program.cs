@@ -21,9 +21,10 @@ namespace RubiksCube.Cli
             var consoleFormatter = new ConsoleFormatter(cube);
             RubiksCubeExpressionParser parser = new RubiksCubeSimpleExpressionParser();
 
+            Console.Clear();
+
             do
             {
-                Console.Clear();
                 Console.WriteLine("Use the command \"help\".");
                 Console.WriteLine();
 
@@ -40,6 +41,7 @@ namespace RubiksCube.Cli
 
                 if (!result.Success)
                 {
+                    Console.Clear();
                     Console.Error.WriteLine(result.ErrorMessage);
                     continue;
                 }
@@ -48,6 +50,8 @@ namespace RubiksCube.Cli
                 {
                     cube.Turn(movement);
                 }
+
+                Console.Clear();
             } while (true);
         }
 

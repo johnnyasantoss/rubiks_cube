@@ -90,21 +90,26 @@ namespace RubiksCube.Expressions
                 if (string.IsNullOrWhiteSpace(expression))
                     break;
 
-                var index = expression.IndexOf(knownExpression, StringComparison.Ordinal);
+                int index;
 
-                if (index < 0)
-                    continue;
-
-                expression = ReplaceWithWhiteSpace(expression, index, knownExpression.Length);
-
-                yield return (index, new RubiksCubeMovement
+                do
                 {
-                    Indexer = SimpleIndexer
-                    , Direction = knownExpression.Contains('\'')
-                        ? TurnDirection.Reverse
-                        : TurnDirection.Normal
-                    , TurnType = key
-                });
+                    index = expression.IndexOf(knownExpression, StringComparison.Ordinal);
+
+                    if (index < 0)
+                        break; // breaks do-while
+
+                    expression = ReplaceWithWhiteSpace(expression, index, knownExpression.Length);
+
+                    yield return (index, new RubiksCubeMovement
+                    {
+                        Indexer = SimpleIndexer
+                        , Direction = knownExpression.Contains('\'')
+                            ? TurnDirection.Reverse
+                            : TurnDirection.Normal
+                        , TurnType = key
+                    });
+                } while (index >= 0);
             }
 
             expressionRef.Value = expression;

@@ -121,7 +121,6 @@ namespace RubiksCube.Core
                     break;
                 case TurnType.Column:
                     throw new NotImplementedException();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -139,7 +138,6 @@ namespace RubiksCube.Core
                     break;
                 case TurnDirection.Reverse:
                     throw new NotImplementedException();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
