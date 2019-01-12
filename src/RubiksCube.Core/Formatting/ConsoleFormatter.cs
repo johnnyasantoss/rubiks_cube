@@ -1,5 +1,6 @@
 using System;
 using RubiksCube.Core.Cube;
+using Alba.CsConsoleFormat;
 
 namespace RubiksCube.Core.Formatting
 {
@@ -7,7 +8,7 @@ namespace RubiksCube.Core.Formatting
     {
         private readonly Cube.RubiksCube _cube;
 
-        private const string Block = "█";
+        private const string Block = "██";
 
         public ConsoleFormatter(Cube.RubiksCube cube)
         {
@@ -18,28 +19,75 @@ namespace RubiksCube.Core.Formatting
         {
             Console.ResetColor();
 
+            var size = _cube.FrontFace.Size * Block.Length;
+
+            var grid = new Grid
+            {
+                Stroke = LineThickness.None
+                , Columns =
+                {
+                    GridLength.Char(size)
+                    , GridLength.Char(size)
+                    , GridLength.Char(size)
+                }
+                , Align = Align.Center
+            };
+
+            var document = new Document(grid);
+
+            var paddingPlaceholders = new Cell[3];
+
             foreach (var cubeFace in _cube.Faces)
             {
+                var padding = GetPaddingCrossStyleByCubeFace(cubeFace);
+
+                if (ShouldBreakCrossStyle(cubeFace))
+                    paddingPlaceholders = new[]
+                    {
+                        new Cell(), new Cell(), new Cell()
+                    };
+
                 for (var x = 0; x < cubeFace.Size; x++)
                 {
                     for (var y = 0; y < cubeFace.Size; y++)
                     {
                         var currentSlot = cubeFace.Slots[x, y];
 
-                        Console.ForegroundColor =
-                            Console.BackgroundColor =
-                                ToConsoleColor(currentSlot.Color);
-
-                        Console.Write(Block);
-                        Console.Write(Block);
+                        paddingPlaceholders[padding]
+                            .Children.Add(
+                                new Span(Block)
+                                {
+                                    Color = ToConsoleColor(currentSlot.Color)
+                                }
+                            );
                     }
-
-                    Console.WriteLine();
                 }
+
+                if (!ShouldBreakCrossStyle(cubeFace))
+                    continue;
+
+                foreach (var placeholder in paddingPlaceholders)
+                    grid.Children.Add(placeholder);
             }
+
+            ConsoleRenderer.RenderDocument(document);
 
             Console.ResetColor();
         }
+
+        private int GetPaddingCrossStyleByCubeFace(CubeFace cubeFace)
+        {
+            if (cubeFace == _cube.LeftFace)
+                return 0;
+
+            if (cubeFace == _cube.RightFace)
+                return 2;
+
+            return 1;
+        }
+
+        private bool ShouldBreakCrossStyle(CubeFace cubeFace)
+            => cubeFace != _cube.FrontFace && cubeFace != _cube.RightFace;
 
         private ConsoleColor ToConsoleColor(CubeColor color)
         {
