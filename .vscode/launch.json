@@ -1,35 +1,35 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "cwd": "${workspaceFolder}/src/${input:project}/",
-            "program": "${workspaceFolder}/src/${input:project}/bin/Debug/netcoreapp2.1/${input:project}.dll",
-            "args": [],
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart",
-            "suppressJITOptimizations": false,
-            "justMyCode": true
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
-        }
-    ],
-    "inputs": [
-        {
-            "id": "project",
-            "type": "pickString",
-            "description": "Name of the project",
-            "options": [
-                "RubiksCube.Solver"
-            ]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "cwd": "${workspaceFolder}/src/${input:project}/",
+      "program": "${workspaceFolder}/src/${input:project}/bin/Debug/netcoreapp2.1/${input:project}.dll",
+      "args": [],
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "suppressJITOptimizations": false,
+      "justMyCode": true
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "project",
+      "type": "pickString",
+      "description": "Name of the project",
+      "options": [
+        "RubiksCube.Solver"
+      ]
+    }
+  ]
 }
