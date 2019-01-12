@@ -6,9 +6,8 @@ namespace RubiksCube.Formatting.Console
 {
     public class ConsoleFormatter : ICubeFormatter
     {
-        private readonly Core.RubiksCube _cube;
-
         private const string Block = "██";
+        private readonly Core.RubiksCube _cube;
 
         public ConsoleFormatter(Core.RubiksCube cube)
         {
