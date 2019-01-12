@@ -1,6 +1,6 @@
 using System;
 
-namespace RubiksCube.Core.Cube
+namespace RubiksCube.Core
 {
     public class RubiksCube
     {

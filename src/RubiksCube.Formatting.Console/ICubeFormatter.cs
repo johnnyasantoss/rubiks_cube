@@ -1,4 +1,4 @@
-namespace RubiksCube.Core.Formatting
+namespace RubiksCube.Formatting.Console
 {
     public interface ICubeFormatter
     {

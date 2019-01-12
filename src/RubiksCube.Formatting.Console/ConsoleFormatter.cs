@@ -1,23 +1,23 @@
 using System;
-using RubiksCube.Core.Cube;
 using Alba.CsConsoleFormat;
+using RubiksCube.Core;
 
-namespace RubiksCube.Core.Formatting
+namespace RubiksCube.Formatting.Console
 {
     public class ConsoleFormatter : ICubeFormatter
     {
-        private readonly Cube.RubiksCube _cube;
+        private readonly Core.RubiksCube _cube;
 
         private const string Block = "██";
 
-        public ConsoleFormatter(Cube.RubiksCube cube)
+        public ConsoleFormatter(Core.RubiksCube cube)
         {
             _cube = cube;
         }
 
         public void Render()
         {
-            Console.ResetColor();
+            System.Console.ResetColor();
 
             var size = _cube.FrontFace.Size * Block.Length;
 
@@ -72,7 +72,7 @@ namespace RubiksCube.Core.Formatting
 
             ConsoleRenderer.RenderDocument(document);
 
-            Console.ResetColor();
+            System.Console.ResetColor();
         }
 
         private int GetPaddingCrossStyleByCubeFace(CubeFace cubeFace)

@@ -1,4 +1,4 @@
-namespace RubiksCube.Core.Cube
+namespace RubiksCube.Core
 {
     public enum TurnDirection : byte
     {

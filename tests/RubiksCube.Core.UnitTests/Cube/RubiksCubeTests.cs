@@ -1,5 +1,4 @@
 using System;
-using RubiksCube.Core.Cube;
 using Xunit;
 
 namespace RubiksCube.Core.UnitTests.Cube
@@ -11,14 +10,14 @@ namespace RubiksCube.Core.UnitTests.Cube
         [InlineData(SimpleDirectionTurn.TopReverse, 0, true)]
         public void CanTurnRow(SimpleDirectionTurn directionTurn, int rowIndex, bool isReverse)
         {
-            var cube = new Core.Cube.RubiksCube(3);
+            var cube = new RubiksCube(3);
 
             cube.Turn(directionTurn);
 
             AssertRowTurn(cube, rowIndex, isReverse);
         }
 
-        private static void AssertRowTurn(Core.Cube.RubiksCube cube, int rowIndex, bool isReverse)
+        private static void AssertRowTurn(RubiksCube cube, int rowIndex, bool isReverse)
         {
             if (rowIndex < 0)
                 throw new ArgumentOutOfRangeException(nameof(rowIndex));

@@ -1,8 +1,8 @@
 ﻿using System;
-using RubiksCube.Core.Cube;
-using RubiksCube.Core.Formatting;
+using RubiksCube.Core;
+using RubiksCube.Formatting.Console;
 
-namespace RubiksCube.Core
+namespace RubiksCube.Cli
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace RubiksCube.Core
                 ushort.TryParse(args[0], out size);
             }
 
-            var r = new Cube.RubiksCube(size);
+            var r = new Core.RubiksCube(size);
 
             ConsoleKey key;
             var consoleFormatter = new ConsoleFormatter(r);
