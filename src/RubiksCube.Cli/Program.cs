@@ -8,7 +8,14 @@ namespace RubiksCube.Core
     {
         private static void Main(string[] args)
         {
-            var r = new Cube.RubiksCube(3);
+            var size = (ushort)3;
+
+            if (args.Length > 0)
+            {
+                ushort.TryParse(args[0], out size);
+            }
+
+            var r = new Cube.RubiksCube(size);
 
             ConsoleKey key;
             var consoleFormatter = new ConsoleFormatter(r);
@@ -25,6 +32,9 @@ namespace RubiksCube.Core
                 key = Console.ReadKey(true)
                     .Key;
 
+//                var input = ReadLine.Read("(move)> ");
+
+                r.Turn(SimpleDirectionTurn.Top);
             } while (key != ConsoleKey.Q);
         }
     }
