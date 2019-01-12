@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\RubiksCube.Core\RubiksCube.Core.csproj"/>
+        <ProjectReference Include="..\..\src\RubiksCube.Expressions\RubiksCube.Expressions.csproj"/>
     </ItemGroup>
 
 </Project>

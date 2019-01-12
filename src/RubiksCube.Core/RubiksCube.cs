@@ -86,25 +86,30 @@ namespace RubiksCube.Core
             switch (turn)
             {
                 case SimpleDirectionTurn.Front:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.FrontReverse:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.Left:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.LeftReverse:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.Right:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.RightReverse:
-                    break;
+                    throw new NotImplementedException();
                 case SimpleDirectionTurn.Top:
                     Turn(TurnType.Line, 0, TurnDirection.Normal);
                     break;
                 case SimpleDirectionTurn.TopReverse:
-                    break;
+                    throw new NotImplementedException();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(turn), turn, null);
             }
+        }
+
+        public void Turn(RubiksCubeMovement movement)
+        {
+            Turn(movement.TurnType, movement.Indexer, movement.Direction);
         }
 
         public void Turn(TurnType type, ushort indexer, TurnDirection direction)
@@ -115,6 +120,7 @@ namespace RubiksCube.Core
                     TurnLine(ref indexer, ref direction);
                     break;
                 case TurnType.Column:
+                    throw new NotImplementedException();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -132,6 +138,7 @@ namespace RubiksCube.Core
                     TurnLineNormal(ref indexer);
                     break;
                 case TurnDirection.Reverse:
+                    throw new NotImplementedException();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);

@@ -1,5 +1,5 @@
 ﻿using System;
-using RubiksCube.Core;
+using RubiksCube.Expressions;
 using RubiksCube.Formatting.Console;
 
 namespace RubiksCube.Cli
@@ -15,26 +15,49 @@ namespace RubiksCube.Cli
                 ushort.TryParse(args[0], out size);
             }
 
-            var r = new Core.RubiksCube(size);
+            var cube = new Core.RubiksCube(size);
 
-            var consoleFormatter = new ConsoleFormatter(r);
+            //TODO: Make the formatter something configurable
+            var consoleFormatter = new ConsoleFormatter(cube);
+            RubiksCubeExpressionParser parser = new RubiksCubeSimpleExpressionParser();
 
             do
             {
                 Console.Clear();
-                Console.WriteLine("Press Q to exit.");
-                Console.WriteLine("Any other key will only refresh the screen");
+                Console.WriteLine("Use the command \"help\".");
                 Console.WriteLine();
 
                 consoleFormatter.Render();
 
                 var input = ReadLine.Read("(move)> ");
 
-                if (input.ToUpperInvariant() == "QUIT")
+                //TODO: Check help command
+
+                if (CheckExitExpression(input))
                     break;
 
-                r.Turn(SimpleDirectionTurn.Top);
+                var result = parser.Parse(input);
+
+                if (!result.Success)
+                {
+                    Console.Error.WriteLine(result.ErrorMessage);
+                    continue;
+                }
+
+                foreach (var movement in result.Movements)
+                {
+                    cube.Turn(movement);
+                }
             } while (true);
+        }
+
+        private static bool CheckExitExpression(string input)
+        {
+            input = input.ToUpperInvariant();
+
+            return input == "QUIT"
+                || input == "Q"
+                || input == "EXIT";
         }
     }
 }
