@@ -8,18 +8,15 @@ namespace RubiksCube.Cli
     {
         private static void Main(string[] args)
         {
-            var size = (ushort)3;
-
-            if (args.Length > 0)
-            {
-                ushort.TryParse(args[0], out size);
-            }
+            var size = ReadArgs(args);
 
             var cube = new Core.RubiksCube(size);
 
             //TODO: Make the formatter something configurable
             var consoleFormatter = new ConsoleFormatter(cube);
             RubiksCubeExpressionParser parser = new RubiksCubeSimpleExpressionParser();
+
+            SetupReadline();
 
             Console.Clear();
 
@@ -32,7 +29,7 @@ namespace RubiksCube.Cli
 
                 var input = ReadLine.Read("(move)> ");
 
-                //TODO: Check help command
+                //TODO: Implement help command
 
                 if (CheckExitExpression(input))
                     break;
@@ -53,6 +50,23 @@ namespace RubiksCube.Cli
 
                 Console.Clear();
             } while (true);
+        }
+
+        private static ushort ReadArgs(string[] args)
+        {
+            var size = (ushort)3;
+
+            if (args.Length > 0)
+            {
+                ushort.TryParse(args[0], out size);
+            }
+
+            return size;
+        }
+
+        private static void SetupReadline()
+        {
+            ReadLine.HistoryEnabled = true;
         }
 
         private static bool CheckExitExpression(string input)
