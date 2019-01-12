@@ -1,4 +1,5 @@
 ﻿using System;
+using RubiksCube.Core.Cube;
 using RubiksCube.Core.Formatting;
 
 namespace RubiksCube.Core
@@ -15,15 +16,16 @@ namespace RubiksCube.Core
             do
             {
                 Console.Clear();
-                Console.WriteLine("Press ESC to exit.");
+                Console.WriteLine("Press Q to exit.");
                 Console.WriteLine("Any other key will only refresh the screen");
                 Console.WriteLine();
 
                 consoleFormatter.Render();
 
-                key = Console.ReadKey(false)
+                key = Console.ReadKey(true)
                     .Key;
-            } while (key != ConsoleKey.Escape);
+
+            } while (key != ConsoleKey.Q);
         }
     }
 }
