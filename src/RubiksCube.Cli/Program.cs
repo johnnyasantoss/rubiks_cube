@@ -17,7 +17,6 @@ namespace RubiksCube.Cli
 
             var r = new Core.RubiksCube(size);
 
-            ConsoleKey key;
             var consoleFormatter = new ConsoleFormatter(r);
 
             do
@@ -29,13 +28,13 @@ namespace RubiksCube.Cli
 
                 consoleFormatter.Render();
 
-                key = Console.ReadKey(true)
-                    .Key;
+                var input = ReadLine.Read("(move)> ");
 
-//                var input = ReadLine.Read("(move)> ");
+                if (input.ToUpperInvariant() == "QUIT")
+                    break;
 
                 r.Turn(SimpleDirectionTurn.Top);
-            } while (key != ConsoleKey.Q);
+            } while (true);
         }
     }
 }
