@@ -7,59 +7,40 @@ namespace RubiksCube.Expressions
 {
     public class RubiksCubeSimpleExpressionParser : RubiksCubeExpressionParser
     {
-        private const int SimpleIndexer = 0;
-
         /// <summary>
         /// All simple expressions (in upper case invariant)
         /// </summary>
-        private static readonly Dictionary<TurnType, string[]> KnownExpressions = new Dictionary<TurnType, string[]>
+        private readonly KnowExpression[] _knownExpressions;
+
+        private static readonly KnowExpressionBuilder[] KnowExpressionBuilders =
         {
-            {
-                TurnType.Line, new[]
-                {
-                    // TOP
-                    "TOP'"
-                    , "T'"
-                    , "TOP"
-                    , "T"
-
-                    // BOTTOM
-                    , "BOTTOM'"
-                    , "B'"
-                    , "BOTTOM"
-                    , "B"
-                }
-            }
-            ,
-            {
-                TurnType.Column, new[]
-                {
-                    // LEFT
-                    "LEFT'"
-                    , "L'"
-                    , "LEFT"
-                    , "L"
-
-                    // FRONT
-                    , "FRONT'"
-                    , "F'"
-                    , "FRONT"
-                    , "F"
-
-                    // RIGHT
-                    , "RIGHT'"
-                    , "R'"
-                    , "RIGHT"
-                    , "R"
-
-                    // BACK
-                    , "BACK'"
-                    , "U'"
-                    , "BACK"
-                    , "U"
-                }
-            }
+            new KnowSimpleExpressionBuilder("TOP", "T", TurnType.Line, true)
+            , new KnowSimpleExpressionBuilder("BOTTOM", "B", TurnType.Line, false)
+            , new KnowSimpleExpressionBuilder("LEFT", "L", TurnType.Column, true)
+            , new KnowSimpleExpressionBuilder("FRONT", "F", TurnType.Column, false)
+            , new KnowSimpleExpressionBuilder("RIGHT", "R", TurnType.Column, false)
+            , new KnowSimpleExpressionBuilder("BACK", "U", TurnType.Column, true)
         };
+
+        public RubiksCubeSimpleExpressionParser(Core.RubiksCube cube)
+            : base(cube)
+        {
+            _knownExpressions = BuildAndSortByBiggerExpression(
+                cube
+                , KnowExpressionBuilders
+            );
+        }
+
+        private static KnowExpression[] BuildAndSortByBiggerExpression(
+            Core.RubiksCube cube
+            , KnowExpressionBuilder[] values
+        )
+        {
+            return values
+                .SelectMany(m => m.BuildAllVariants(cube.Size))
+                .OrderByDescending(m => m.Expression.Length)
+                .ToArray();
+        }
 
         public override ParseResult Parse(string expression)
         {
@@ -84,8 +65,7 @@ namespace RubiksCube.Expressions
         {
             var expression = expressionRef.Value.ToUpperInvariant();
 
-            foreach (var key in KnownExpressions.Keys)
-            foreach (var knownExpression in KnownExpressions[key])
+            foreach (var knownExpression in _knownExpressions)
             {
                 if (string.IsNullOrWhiteSpace(expression))
                     break;
@@ -94,20 +74,20 @@ namespace RubiksCube.Expressions
 
                 do
                 {
-                    index = expression.IndexOf(knownExpression, StringComparison.Ordinal);
+                    index = expression.IndexOf(knownExpression.Expression, StringComparison.Ordinal);
 
                     if (index < 0)
                         break; // breaks do-while
 
-                    expression = ReplaceWithWhiteSpace(expression, index, knownExpression.Length);
+                    expression = ReplaceWithWhiteSpace(expression, index, knownExpression.Expression.Length);
 
                     yield return (index, new RubiksCubeMovement
                     {
-                        Indexer = SimpleIndexer
-                        , Direction = knownExpression.Contains('\'')
+                        Indexer = knownExpression.Indexer
+                        , Direction = knownExpression.IsReverse
                             ? TurnDirection.Reverse
                             : TurnDirection.Normal
-                        , TurnType = key
+                        , TurnType = knownExpression.TurnType
                     });
                 } while (index >= 0);
             }

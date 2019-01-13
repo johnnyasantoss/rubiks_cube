@@ -5,6 +5,14 @@ namespace RubiksCube.Expressions.UnitTests
 {
     public class SimpleExpressionsTests
     {
+        private readonly RubiksCubeSimpleExpressionParser _parser;
+
+        public SimpleExpressionsTests()
+        {
+            var cube = new Core.RubiksCube(3);
+            _parser = new RubiksCubeSimpleExpressionParser(cube);
+        }
+
         [Theory]
         [InlineData("top")]
         [InlineData("TOP")]
@@ -13,9 +21,7 @@ namespace RubiksCube.Expressions.UnitTests
         [InlineData("B")]
         public void ShouldBeAbleParseSimpleExpressions(string expression)
         {
-            var parser = new RubiksCubeSimpleExpressionParser();
-
-            var result = parser.Parse(expression);
+            var result = _parser.Parse(expression);
 
             Assert.True(result.Success);
             Assert.Single(result.Movements);
@@ -27,9 +33,7 @@ namespace RubiksCube.Expressions.UnitTests
         [InlineData("utrlbblrt")]
         public void ShouldBeAbleParseMultipleExpressions(string expression)
         {
-            var parser = new RubiksCubeSimpleExpressionParser();
-
-            var result = parser.Parse(expression);
+            var result = _parser.Parse(expression);
 
             Assert.True(result.Success);
             Assert.True(result.Movements.Count() > 1);
@@ -39,9 +43,7 @@ namespace RubiksCube.Expressions.UnitTests
         [InlineData("RL'TB", "rltb")]
         public void ShouldBeAbleParseMultipleExpressionsInACorrectOrder(string expected, string expression)
         {
-            var parser = new RubiksCubeSimpleExpressionParser();
-
-            var result = parser.Parse(expression);
+            var result = _parser.Parse(expression);
 
             //TODO: assertion
         }

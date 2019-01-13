@@ -14,7 +14,7 @@ namespace RubiksCube.Cli
 
             //TODO: Make the formatter something configurable
             var consoleFormatter = new ConsoleFormatter(cube);
-            RubiksCubeExpressionParser parser = new RubiksCubeSimpleExpressionParser();
+            RubiksCubeExpressionParser parser = new RubiksCubeSimpleExpressionParser(cube);
 
             SetupReadline();
 
@@ -27,7 +27,8 @@ namespace RubiksCube.Cli
 
                 consoleFormatter.Render();
 
-                var input = ReadLine.Read("(move)> ");
+                var input = ReadLine.Read("(move)> ")
+                    .Replace("\0", string.Empty);
 
                 //TODO: Implement help command
 
@@ -66,6 +67,7 @@ namespace RubiksCube.Cli
 
         private static void SetupReadline()
         {
+            ReadLine.AutoCompletionHandler = new Test();
             ReadLine.HistoryEnabled = true;
         }
 
@@ -77,5 +79,21 @@ namespace RubiksCube.Cli
                 || input == "Q"
                 || input == "EXIT";
         }
+    }
+
+    internal class Test : IAutoCompleteHandler
+    {
+        public string[] GetSuggestions(string text, int index)
+        {
+            return new[]
+            {
+                "TOP", "LEFT"
+            };
+        }
+
+        public char[] Separators { get; set; } =
+        {
+            ' ', '\''
+        };
     }
 }

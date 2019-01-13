@@ -4,7 +4,7 @@ namespace RubiksCube.Core
 {
     public class RubiksCube
     {
-        public const ushort FacesSize = 6;
+        public const ushort FacesAmount = 6;
 
         public const int BackFaceIndex = 5;
         public const int BottomFaceIndex = 4;
@@ -15,15 +15,21 @@ namespace RubiksCube.Core
 
         private readonly CubeFace[] _faces;
 
+        public ushort Size { get; }
+
         public RubiksCube(CubeFace[] faces)
         {
             if (faces == null)
                 throw new ArgumentNullException(nameof(faces));
 
-            if (faces.Length != FacesSize)
+            if (faces.Length != FacesAmount)
                 throw new InvalidOperationException("Invalid amount of faces for a cube.");
 
             _faces = faces;
+
+            Size = faces[0]
+                .Size;
+
             SanityCheck();
         }
 
@@ -40,6 +46,7 @@ namespace RubiksCube.Core
                 }
             )
         {
+            Size = size;
         }
 
         public CubeFace[] Faces => _faces;
@@ -60,7 +67,7 @@ namespace RubiksCube.Core
         {
             var faceSize = -1;
 
-            for (var i = 0; i < FacesSize; i++)
+            for (var i = 0; i < FacesAmount; i++)
             {
                 var currentFace = _faces[i];
 

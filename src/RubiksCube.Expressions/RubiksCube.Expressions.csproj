@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RubiksCube.Core\RubiksCube.Core.csproj"/>
+        <ProjectReference Include="..\RubiksCube.Core\RubiksCube.Core.csproj" />
     </ItemGroup>
 
 </Project>
