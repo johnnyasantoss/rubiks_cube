@@ -1,4 +1,5 @@
 using System;
+using RubiksCube.Core.Enums;
 
 namespace RubiksCube.Core
 {

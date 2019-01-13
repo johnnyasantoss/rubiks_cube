@@ -1,4 +1,4 @@
-﻿namespace RubiksCube.Core
+﻿namespace RubiksCube.Core.Enums
 {
     public enum CubeSlotType
     {

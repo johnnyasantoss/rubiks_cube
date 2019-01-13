@@ -1,7 +1,8 @@
 using System;
+using RubiksCube.Core.Enums;
 using Xunit;
 
-namespace RubiksCube.Core.UnitTests.Cube
+namespace RubiksCube.Core.UnitTests
 {
     public class RubiksCubeTests
     {
@@ -28,7 +29,7 @@ namespace RubiksCube.Core.UnitTests.Cube
                 ? cube.LeftFace
                 : cube.RightFace;
 
-            for (var i = 0; i < cubeFrontFace.Size; i++)
+            for (var i = 0; i < cube.Size; i++)
             {
                 Assert.Equal(
                     cubeFrontFace.Slots[rowIndex, i]

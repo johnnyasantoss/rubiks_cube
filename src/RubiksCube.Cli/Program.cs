@@ -1,5 +1,5 @@
 ﻿using System;
-using RubiksCube.Expressions;
+using RubiksCube.Expressions.Parsers;
 using RubiksCube.Formatting.Console;
 
 namespace RubiksCube.Cli

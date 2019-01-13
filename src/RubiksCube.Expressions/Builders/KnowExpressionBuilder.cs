@@ -1,6 +1,6 @@
-using RubiksCube.Core;
+using RubiksCube.Core.Enums;
 
-namespace RubiksCube.Expressions
+namespace RubiksCube.Expressions.Builders
 {
     internal abstract class KnowExpressionBuilder
     {

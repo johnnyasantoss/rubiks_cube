@@ -1,4 +1,5 @@
 using System.Linq;
+using RubiksCube.Expressions.Parsers;
 using Xunit;
 
 namespace RubiksCube.Expressions.UnitTests

@@ -1,4 +1,5 @@
 using System;
+using RubiksCube.Core.Enums;
 
 namespace RubiksCube.Core
 {
@@ -14,8 +15,6 @@ namespace RubiksCube.Core
         public const int RightFaceIndex = 3;
 
         private readonly CubeFace[] _faces;
-
-        public ushort Size { get; }
 
         public RubiksCube(CubeFace[] faces)
         {
@@ -48,6 +47,8 @@ namespace RubiksCube.Core
         {
             Size = size;
         }
+
+        public ushort Size { get; }
 
         public CubeFace[] Faces => _faces;
 
@@ -90,14 +91,16 @@ namespace RubiksCube.Core
 
         public void Turn(SimpleDirectionTurn turn)
         {
+            var maxIndex = (ushort)(Size - 1);
+
             switch (turn)
             {
                 //TODO: Spin the cube on front and back moves
                 case SimpleDirectionTurn.Front:
-                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Normal);
+                    Turn(TurnType.Line, maxIndex, TurnDirection.Normal);
                     break;
                 case SimpleDirectionTurn.FrontReverse:
-                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Reverse);
+                    Turn(TurnType.Line, maxIndex, TurnDirection.Reverse);
                     break;
                 case SimpleDirectionTurn.Left:
                     Turn(TurnType.Column, 0, TurnDirection.Normal);
@@ -106,10 +109,10 @@ namespace RubiksCube.Core
                     Turn(TurnType.Column, 0, TurnDirection.Reverse);
                     break;
                 case SimpleDirectionTurn.Right:
-                    Turn(TurnType.Column, RightFace.Size, TurnDirection.Normal);
+                    Turn(TurnType.Column, maxIndex, TurnDirection.Normal);
                     break;
                 case SimpleDirectionTurn.RightReverse:
-                    Turn(TurnType.Column, RightFace.Size, TurnDirection.Reverse);
+                    Turn(TurnType.Column, maxIndex, TurnDirection.Reverse);
                     break;
                 case SimpleDirectionTurn.Top:
                     Turn(TurnType.Line, 0, TurnDirection.Normal);
@@ -118,10 +121,10 @@ namespace RubiksCube.Core
                     Turn(TurnType.Line, 0, TurnDirection.Reverse);
                     break;
                 case SimpleDirectionTurn.Bottom:
-                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Normal);
+                    Turn(TurnType.Line, maxIndex, TurnDirection.Normal);
                     break;
                 case SimpleDirectionTurn.BottomReverse:
-                    Turn(TurnType.Line, FrontFace.Size, TurnDirection.Reverse);
+                    Turn(TurnType.Line, maxIndex, TurnDirection.Reverse);
                     break;
                 case SimpleDirectionTurn.Back:
                     Turn(TurnType.Line, 0, TurnDirection.Normal);
@@ -179,7 +182,7 @@ namespace RubiksCube.Core
                 frontFace, LeftFace, BackFace, RightFace, frontFace
             };
 
-            var temp = new CubeSlot[frontFace.Size];
+            var temp = new CubeSlot[Size];
 
             foreach (var currentFace in faces)
             {

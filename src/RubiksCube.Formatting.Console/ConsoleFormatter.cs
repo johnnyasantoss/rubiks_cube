@@ -18,7 +18,7 @@ namespace RubiksCube.Formatting.Console
         {
             System.Console.ResetColor();
 
-            var size = _cube.FrontFace.Size * Block.Length;
+            var size = _cube.Size * Block.Length;
 
             var grid = new Grid
             {

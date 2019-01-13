@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RubiksCube.Core;
+using RubiksCube.Core.Enums;
+using RubiksCube.Expressions.Builders;
 
-namespace RubiksCube.Expressions
+namespace RubiksCube.Expressions.Parsers
 {
     public class RubiksCubeSimpleExpressionParser : RubiksCubeExpressionParser
     {
-        /// <summary>
-        /// All simple expressions (in upper case invariant)
-        /// </summary>
-        private readonly KnowExpression[] _knownExpressions;
-
         private static readonly KnowExpressionBuilder[] KnowExpressionBuilders =
         {
             new KnowSimpleExpressionBuilder("TOP", "T", TurnType.Line, true)
@@ -21,6 +18,11 @@ namespace RubiksCube.Expressions
             , new KnowSimpleExpressionBuilder("RIGHT", "R", TurnType.Column, false)
             , new KnowSimpleExpressionBuilder("BACK", "U", TurnType.Column, true)
         };
+
+        /// <summary>
+        /// All simple expressions (in upper case invariant)
+        /// </summary>
+        private readonly KnowExpression[] _knownExpressions;
 
         public RubiksCubeSimpleExpressionParser(Core.RubiksCube cube)
             : base(cube)

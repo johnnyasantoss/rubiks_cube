@@ -1,3 +1,5 @@
+using RubiksCube.Core.Enums;
+
 namespace RubiksCube.Core
 {
     public class CubeSlot
