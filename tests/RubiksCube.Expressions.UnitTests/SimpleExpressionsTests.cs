@@ -20,6 +20,8 @@ namespace RubiksCube.Expressions.UnitTests
         [InlineData("T")]
         [InlineData("L")]
         [InlineData("B")]
+        [InlineData("M")]
+        [InlineData("C")]
         public void ShouldBeAbleParseSimpleExpressions(string expression)
         {
             var result = _parser.Parse(expression);

@@ -1,20 +1,28 @@
+using System;
 using RubiksCube.Core.Enums;
 
 namespace RubiksCube.Expressions.Builders
 {
     internal class KnowSimpleExpressionBuilder : KnowExpressionBuilder
     {
-        public KnowSimpleExpressionBuilder(string longVersion, string shortVersion, TurnType turnType, bool isZeroIndex)
+        public KnowSimpleExpressionBuilder(string longVersion, string shortVersion, TurnType turnType)
             : base(longVersion, shortVersion, turnType)
         {
-            IsZeroIndex = isZeroIndex;
         }
 
-        public bool IsZeroIndex { get; }
+        public bool IsZeroIndex { get; set; }
+
+        public bool IsMiddle { get; set; }
 
         protected override ushort GetIndexer(ushort cubeSize)
-            => (ushort)(IsZeroIndex
-                ? 0
-                : cubeSize - 1);
+        {
+            if (IsZeroIndex)
+                return 0;
+
+            if (IsMiddle)
+                return (ushort)(Math.Round(cubeSize / 2D) - 1D);
+
+            return (ushort)(cubeSize - 1);
+        }
     }
 }

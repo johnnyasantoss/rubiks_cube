@@ -9,6 +9,7 @@ namespace RubiksCube.Core.UnitTests
         [Theory]
         [InlineData(SimpleDirectionTurn.Top, 0, false)]
         [InlineData(SimpleDirectionTurn.TopReverse, 0, true)]
+        [InlineData(SimpleDirectionTurn.Center, 1, false)]
         public void CanTurnRow(SimpleDirectionTurn directionTurn, int rowIndex, bool isReverse)
         {
             var cube = new RubiksCube(3);

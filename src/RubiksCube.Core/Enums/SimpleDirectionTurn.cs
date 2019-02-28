@@ -14,5 +14,7 @@ namespace RubiksCube.Core.Enums
         , BottomReverse
         , Back
         , BackReverse
+        , Center
+        , CenterReverse
     }
 }

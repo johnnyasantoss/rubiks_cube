@@ -9,7 +9,7 @@
       "cwd": "${workspaceFolder}/src/${input:project}/",
       "program": "${workspaceFolder}/src/${input:project}/bin/Debug/netcoreapp2.1/${input:project}.dll",
       "args": [],
-      "console": "internalConsole",
+      "console": "externalTerminal",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart",
       "suppressJITOptimizations": false,
@@ -28,7 +28,7 @@
       "type": "pickString",
       "description": "Name of the project",
       "options": [
-        "RubiksCube.Solver"
+        "RubiksCube.Cli"
       ]
     }
   ]

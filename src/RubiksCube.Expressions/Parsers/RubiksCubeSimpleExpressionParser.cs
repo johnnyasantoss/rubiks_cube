@@ -11,12 +11,29 @@ namespace RubiksCube.Expressions.Parsers
     {
         private static readonly KnowExpressionBuilder[] KnowExpressionBuilders =
         {
-            new KnowSimpleExpressionBuilder("TOP", "T", TurnType.Line, true)
-            , new KnowSimpleExpressionBuilder("BOTTOM", "B", TurnType.Line, false)
-            , new KnowSimpleExpressionBuilder("LEFT", "L", TurnType.Column, true)
-            , new KnowSimpleExpressionBuilder("FRONT", "F", TurnType.Column, false)
-            , new KnowSimpleExpressionBuilder("RIGHT", "R", TurnType.Column, false)
-            , new KnowSimpleExpressionBuilder("BACK", "U", TurnType.Column, true)
+            new KnowSimpleExpressionBuilder("TOP", "T", TurnType.Line)
+            {
+                IsZeroIndex = true
+            }
+            , new KnowSimpleExpressionBuilder("MIDDLE", "M", TurnType.Line)
+            {
+                IsMiddle = true
+            }
+            , new KnowSimpleExpressionBuilder("BOTTOM", "B", TurnType.Line)
+            , new KnowSimpleExpressionBuilder("LEFT", "L", TurnType.Column)
+            {
+                IsZeroIndex = true
+            }
+            , new KnowSimpleExpressionBuilder("FRONT", "F", TurnType.Column)
+            , new KnowSimpleExpressionBuilder("CENTER", "C", TurnType.Column)
+            {
+                IsMiddle = true
+            }
+            , new KnowSimpleExpressionBuilder("RIGHT", "R", TurnType.Column)
+            , new KnowSimpleExpressionBuilder("BACK", "U", TurnType.Column)
+            {
+                IsZeroIndex = true
+            }
         };
 
         /// <summary>

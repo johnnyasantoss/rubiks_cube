@@ -50,6 +50,8 @@ namespace RubiksCube.Core
 
         public ushort Size { get; }
 
+        public ushort Middle => (ushort)(Math.Round(Size / 2D) - 1D);
+
         public CubeFace[] Faces => _faces;
 
         public CubeFace BackFace => _faces[BackFaceIndex];
@@ -131,6 +133,12 @@ namespace RubiksCube.Core
                     break;
                 case SimpleDirectionTurn.BackReverse:
                     Turn(TurnType.Line, 0, TurnDirection.Reverse);
+                    break;
+                case SimpleDirectionTurn.Center:
+                    Turn(TurnType.Line, Middle, TurnDirection.Normal);
+                    break;
+                case SimpleDirectionTurn.CenterReverse:
+                    Turn(TurnType.Line, Middle, TurnDirection.Reverse);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(turn), turn, null);
