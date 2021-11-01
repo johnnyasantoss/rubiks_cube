@@ -36,12 +36,9 @@ namespace RubiksCube.Core
             : this(
                 new[]
                 {
-                    new CubeFace(CubeColor.Orange, size)
-                    , new CubeFace(CubeColor.Green, size)
-                    , new CubeFace(CubeColor.White, size)
-                    , new CubeFace(CubeColor.Blue, size)
-                    , new CubeFace(CubeColor.Red, size)
-                    , new CubeFace(CubeColor.Yellow, size)
+                    new CubeFace(CubeColor.Orange, size), new CubeFace(CubeColor.Green, size),
+                    new CubeFace(CubeColor.White, size), new CubeFace(CubeColor.Blue, size),
+                    new CubeFace(CubeColor.Red, size), new CubeFace(CubeColor.Yellow, size)
                 }
             )
         {
@@ -50,7 +47,7 @@ namespace RubiksCube.Core
 
         public ushort Size { get; }
 
-        public ushort Middle => (ushort)(Math.Round(Size / 2D) - 1D);
+        public ushort Middle => (ushort) (Math.Round(Size / 2D) - 1D);
 
         public CubeFace[] Faces => _faces;
 
@@ -93,11 +90,10 @@ namespace RubiksCube.Core
 
         public void Turn(SimpleDirectionTurn turn)
         {
-            var maxIndex = (ushort)(Size - 1);
+            var maxIndex = (ushort) (Size - 1);
 
             switch (turn)
             {
-                //TODO: Spin the cube on front and back moves
                 case SimpleDirectionTurn.Front:
                     Turn(TurnType.Line, maxIndex, TurnDirection.Normal);
                     break;
@@ -158,7 +154,8 @@ namespace RubiksCube.Core
                     TurnLine(ref indexer, ref direction);
                     break;
                 case TurnType.Column:
-                    throw new NotImplementedException();
+                    TurnColumn(ref indexer, ref direction);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -175,19 +172,99 @@ namespace RubiksCube.Core
                     TurnLineNormal(ref indexer);
                     break;
                 case TurnDirection.Reverse:
-                    throw new NotImplementedException();
+                    TurnLineReversed(ref indexer);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
         }
 
-        private void TurnLineNormal(ref ushort indexer)
+        private void TurnColumn(
+            ref ushort indexer
+            , ref TurnDirection direction
+        )
         {
-            var frontFace = FrontFace;
+            switch (direction)
+            {
+                case TurnDirection.Normal:
+                    TurnColumnNormal(ref indexer);
+                    break;
+                case TurnDirection.Reverse:
+                    TurnColumnReversed(ref indexer);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        }
 
+        private void TurnColumnNormal(ref ushort indexer)
+        {
             var faces = new[]
             {
-                frontFace, LeftFace, BackFace, RightFace, frontFace
+                TopFace, FrontFace, BottomFace, BackFace, TopFace
+            };
+
+            var temp = new CubeSlot[Size];
+
+            foreach (var currentFace in faces)
+            {
+                for (var i = 0; i < currentFace.Size; i++)
+                {
+                    //swap
+                    var currentTemp = currentFace.Slots[i, indexer];
+                    currentFace.Slots[i, indexer] = temp[i];
+                    temp[i] = currentTemp;
+                }
+            }
+        }
+
+        private void TurnColumnReversed(ref ushort indexer)
+        {
+            var faces = new[]
+            {
+                TopFace, BackFace, BottomFace, FrontFace, TopFace
+            };
+
+            var temp = new CubeSlot[Size];
+
+            foreach (var currentFace in faces)
+            {
+                for (var i = 0; i < currentFace.Size; i++)
+                {
+                    //swap
+                    var currentTemp = currentFace.Slots[i, indexer];
+                    currentFace.Slots[i, indexer] = temp[i];
+                    temp[i] = currentTemp;
+                }
+            }
+        }
+
+        private void TurnLineNormal(ref ushort indexer)
+        {
+            var faces = new[]
+            {
+                FrontFace, LeftFace, BackFace, RightFace, FrontFace
+            };
+
+            var temp = new CubeSlot[Size];
+
+            foreach (var currentFace in faces)
+            {
+                for (var i = 0; i < currentFace.Size; i++)
+                {
+                    //swap
+                    var currentTemp = currentFace.Slots[indexer, i];
+                    currentFace.Slots[indexer, i] = temp[i];
+                    temp[i] = currentTemp;
+                }
+            }
+        }
+
+        private void TurnLineReversed(ref ushort indexer)
+        {
+            var faces = new[]
+            {
+                FrontFace, RightFace, BackFace, LeftFace, FrontFace
             };
 
             var temp = new CubeSlot[Size];

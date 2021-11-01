@@ -43,12 +43,14 @@ namespace RubiksCube.Expressions.UnitTests
         }
 
         [Theory]
-        [InlineData("RL'TB", "rltb")]
-        public void ShouldBeAbleParseMultipleExpressionsInACorrectOrder(string expected, string expression)
+        [InlineData("RL'TB")]
+        [InlineData("RLTB")]
+        public void ShouldBeAbleParseMultipleExpressionsInACorrectOrder(string expression)
         {
             var result = _parser.Parse(expression);
 
-            //TODO: assertion
+            Assert.True(result.Success);
+            Assert.True(result.Movements.Count() == 4);
         }
     }
 }
